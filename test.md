@@ -1,0 +1,82 @@
+Tech stack:
+
+Here’s a streamlined architecture and design guide for your hackathon project, focused on using the absolute minimum set of tools and skipping all non-essential complexity:
+
+---
+
+## Minimal Tech Stack
+
+- **Frontend:** React (TypeScript), Tailwind CSS (no extra UI libraries unless you need a specific component)
+- **Backend:** FastAPI (Python)
+- **LLMs:** Groq API (https://github.com/groq/groq-python)
+- **State:** Store game state in backend memory (Python dict)
+- **Database:** None (all in-memory, resets on server restart)
+- **Auth:** None
+- **Deployment:** Run frontend and backend locally 
+
+---
+
+## Backend (FastAPI, Python)
+
+- **Dependencies:** `fastapi`, `uvicorn`, `httpx` (for Groq API calls)
+- **State:** Use a Python `dict` to track sessions and game state.
+- **Endpoints:** One for each game action (e.g. `/start`, `/player-action`, `/judge`, `/scribe`).
+- **LLM Calls:** Use `httpx` to call Groq API for narrator, objectives, judge, moderator, scribe.
+- **Validation:** Minimal, just check for empty or obviously bad input.
+
+**Example:**
+```python
+from fastapi import FastAPI, Request
+import httpx
+
+app = FastAPI()
+game_sessions = {}
+
+@app.post("/player-action")
+async def player_action(request: Request):
+    data = await request.json()
+    # Call Groq API for moderator validation
+    # Update in-memory game state
+    # Return updated state
+```
+
+---
+
+## Frontend (React + TypeScript + Tailwind CSS)
+
+- **Dependencies:** `react`, `react-dom`, `tailwindcss`, `axios`
+- **UI:** Use Tailwind for all styling. Build your own minimal components.
+- **State:** Use React state/hooks.
+- **Networking:** Use Axios or fetch for API calls.
+
+**Example:**
+```tsx
+import { useState } from "react";
+import axios from "axios";
+
+export default function PlayerInput() {
+  const [action, setAction] = useState("");
+  const [pace, setPace] = useState(3);
+
+  const submit = async () => {
+    await axios.post("/player-action", { action, pace });
+  };
+
+  return (
+    
+       setAction(e.target.value)} className="border" />
+       setPace(Number(e.target.value))} />
+      Submit
+    
+  );
+}
+```
+---
+
+## Summary of Tools
+
+- **Backend:** FastAPI, httpx
+- **Frontend:** React, Tailwind CSS, Axios
+- **LLMs:** Groq API (all roles)
+- **State:** Python dict (in memory)
+- **No DB, no auth, no extra libraries unless absolutely needed**

@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Kofi:
+### Game Concept Overview  
+This collaborative-competitive storytelling experience features two players co-creating a narrative driven by specialized AI systems. The game blends creative writing with objective-based competition, culminating in AI-generated video summaries. Key components include:
+
+1. **Narrative Foundation**  
+   - **Narrator AI**: Establishes initial setting, characters, and context (e.g., "Cyberpunk marketplace where rival hackers clash over a data crystal")  
+   - **Objective AI**: Generates two mutually exclusive goals from the narrator's setup (e.g., "Steal the prototype" vs. "Destroy the prototype")  
+
+2. **Player Interaction**  
+   - **Turn-based storytelling**: Players alternate writing 50-word actions (1 sentence max)  
+   - **Pace slider**: Controls narrative impact (1=subtle detail, 5=major plot twist)  
+   - **Moderator AI**: Validates inputs for:  
+     - Make sure the input does not override the environment of the story
+     - Make sure the input does not deviate from the previous story context by too much
+
+3. **Game Resolution**  
+   - **Judge AI**: Analyzes full story transcript to:  
+     - Declare winning objective  
+   - **Scribe AI**: Generates 15-30 second Veo3 video summary  
+
+---
+
+### Gameplay Sequence  
+1. **Initialization**  
+   - Two players join session  
+   - Narrator AI establishes setting  
+   - Objective AI defines conflicting goals  
+
+2. **Creative Phase**  
+   - Player 1 writes action + sets pace slider  
+   - Moderator AI:  
+     - Approves valid inputs and declines prompts that break the rules outlined 
+   - Player 2 responds to modified narrative  
+   - Cycle repeats until both players decide to stop playing 
+
+3. **Termination**  
+   - Judge AI evaluates story against objectives  
+   - Scribe AI produces video recap  
